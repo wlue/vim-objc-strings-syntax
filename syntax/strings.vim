@@ -13,12 +13,17 @@ unlet b:current_syntax
 
 syn sync fromstart
 
-syn region    sString            start=+L\="+ skip=+\\\\\|\\"+ end=+"+ contains=@Spell
-syn region    dmComment          start="/\*" end="\*/" contains=@Spell extend
+syn region    sString             start=+L\="+ skip=+\\\\\|\\"+ end=+"+ contains=@Spell,sFormat
+syn match     sFormat             display contained '%.'
+syn match     sFormat             display contained '%[0-9]\+\$.'
+
+syn region    sComment            start="/\*" end="\*/" contains=@Spell extend
+syn match     sEquals             '='
 
 " Define the default highlighting.
-hi def link   sString            String
-hi def link   sComment           Comment
+hi def link   sString             String
+hi def link   sFormat             Special
+hi def link   sComment            Comment
 
 let b:current_syntax = "strings"
 
